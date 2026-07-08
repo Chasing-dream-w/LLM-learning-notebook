@@ -16,9 +16,9 @@ Gradio软件包，用于快速展示函数、模型，运行在python中
 
 
 Agent skill
-写成一个skill.md文档，里面写满了对大模型回答问题的格式和内容的限制，本质上时全局的prompt，一个例子如：
+生成一个SKILL.md文档，里面写满了对大模型回答问题的格式和内容的限制，本质上时全局的prompt，一个例子如：
 
-        name ： 天气助手
+        name ： weather-assistant
         描述信息：出门物品生成清单。当用户询问“出门要带什么、今天怎么样、要准备什么”时使用
         
         ## 目标
@@ -35,5 +35,7 @@ Agent skill
         2. 雨伞：下雨天携带
         ...
 
+注意，存放此提示词文件的位置在 ./Agent名称/skill/ 目录下，如./codex/skill/，在此目录下创建一个与name相同的文件夹如weather-assistant，在该文件夹下生成SKILL.md文档
+所以，SKILL.md 文档位于 ./Agent名称/skill/当前助手名称/SKILL.md
 
 
