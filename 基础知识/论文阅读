@@ -1,6 +1,6 @@
 
-2026.6.22
-《Attention Is All Your Need》
+2026.6.25
+经典 《Attention Is All Your Need》 精读
     论文首次介绍了transformer架构。transformer是一个神经网络模型，不同于RNN对训练的串行性和LSTM对于长序列数据的遗忘特性，
 transformer架构可以做到对数据的并行训练，更重要的是模型学到了各个词之间的注意关系。
     transformer单元由一个编码器和一个解码器构成。编码器内，接受输入到多头自注意层，然后经自注意力机制处理后进入线性层，在
@@ -25,3 +25,29 @@ X相同维度的输出Z。
     Position Encoding补充位置信息，因为Attention本身不知道顺序。
     Multi-head让模型能够从多个不同的表示子空间学习关系。
     整个模型实际上就是不断堆叠相同的Encoder Layer和Decoder Layer。
+
+
+2026.6.29
+前沿 《ICLR-2025-safety-alignment-should-be-made-more-than-just-a-few-tokens-deep-Paper-Conference》 略读
+    论文介绍了大模型的安全对齐，指出了当前（2025年）大模型对于违禁词的回答限制存在弊端，容易被简单的手段（如预填充、GCG、解码
+参数攻击、微调攻击）绕开安全检测，大模型依旧会输出违禁词。论文指出，大多数模型会在开头的有限token内拒绝提供关于违禁词的回答，
+但在后边的深层token时，模型依旧会输出违禁词，作者将此问题定义为 浅层安全对齐 。
+    针对这个问题，文章提出两种解决方法供参考：第一种为数据增强，在模型输出了有害内容后能紧急刹车；第二种是增强约束，在模型输出
+的前几个token加强梯度，防止其偏离安全限制。
+
+
+2026.7.04
+经典 《Improving Language Understanding by Generative Pre-Training》 略读
+
+
+2026.7.10
+经典 《BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding》
+
+
+
+
+
+
+
+
+
