@@ -1,1 +1,27 @@
 
+2026.6.22
+《Attention Is All Your Need》
+    论文首次介绍了transformer架构。transformer是一个神经网络模型，不同于RNN对训练的串行性和LSTM对于长序列数据的遗忘特性，
+transformer架构可以做到对数据的并行训练，更重要的是模型学到了各个词之间的注意关系。
+    transformer单元由一个编码器和一个解码器构成。编码器内，接受输入到多头自注意层，然后经自注意力机制处理后进入线性层，在
+线性层输出后进行残差连接防止网络退化，同时归一化得到编码；解码器内，第一层带掩码的多头自注意层接受输出（带掩码是为了防止模
+型看到答案，导致训练无效），将其（作为Q）处理后输入到第二个多头自注意层，第二层多头自注意层接受第一层的输出，与编码器的输出
+（作为K V）后，将输出给到线性层，处理同上。
+    由N个并行的上述transformer单元构成了transformer架构。将待训练数据输入前，需要将其序列化。所以在输入前有一个词Embeddi—
+—ng层将数据嵌入；为了标记单词/字在句子中的位置，也使用了位置Embedding，为固定的sin、cos函数。二者相加得到输入序列X。
+    其中， Multi-Head Attention 层的工作原理如下：
+    自注意单元，主要目的是训练三个矩阵：W_q、W_k、W_v。分别代表查询参数矩阵、键矩阵、值矩阵。初始三个矩阵按照指定方式初始化
+，然后将输入矩阵X（每一行代表一个字/单词，假设8*256）分别与W_q、W_k、W_v（维度均为256*8）相乘得到Q、K、V，作为这段序列的查
+询Query、键Key、值Value。然后将K^T、Q进行softmax处理，同时为了防止梯度减小，除以√d_k后再与V相乘，得到每个词对自己和其他词的注
+意力Attention，然后输出得到Z_1。由多个自注意单元训练不同的W_q、W_k、W_v，得到多个输出Z_i，最后将Z_i拼接，再经过线性层得到与
+X相同维度的输出Z。
+
+
+小结（AI）：
+    Transformer最大的创新不是QKV，而是完全放弃RNN和CNN，只依赖Attention建模序列关系。
+    Self-Attention让序列中任意两个Token能够直接交互，因此能够并行计算。
+    Encoder负责理解输入；Decoder负责结合历史输出和Encoder信息生成下一个Token。
+    Attention真正计算的是Softmax(QKᵀ/√dk)V。
+    Position Encoding补充位置信息，因为Attention本身不知道顺序。
+    Multi-head让模型能够从多个不同的表示子空间学习关系。
+    整个模型实际上就是不断堆叠相同的Encoder Layer和Decoder Layer。
