@@ -1,5 +1,5 @@
 
-2026.7.8
+2026.07.08
 
 大模型应用场景：
         自然语言处理 NLP
@@ -39,5 +39,10 @@ Agent skill
 
 注意，存放此提示词文件的位置在 ./Agent名称/skill/ 目录下，如./codex/skill/，在此目录下创建一个与name相同的文件夹如weather-assistant，在该文件夹下生成SKILL.md文档
 所以，SKILL.md 文档位于 ./Agent名称/skill/当前助手名称/SKILL.md
+
+
+2026.07.10
+用codex做了一个简单的React个人主页
+
 
 
