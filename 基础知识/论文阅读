@@ -1,6 +1,6 @@
 
 2026.6.25
-经典 《Attention Is All Your Need》 
+经典 《Attention Is All Your Need》 Transformer
     论文首次介绍了transformer架构。transformer是一个神经网络模型，不同于RNN对训练的串行性和LSTM对于长序列数据的遗忘特性，
 transformer架构可以做到对数据的并行训练，更重要的是模型学到了各个词之间的注意关系。
     transformer单元由一个编码器和一个解码器构成。编码器内，接受输入到多头自注意层，然后经自注意力机制处理后进入线性层，在
@@ -38,7 +38,7 @@ X相同维度的输出Z。
 
 
 2026.7.04
-经典 《Improving Language Understanding by Generative Pre-Training》
+经典 《Improving Language Understanding by Generative Pre-Training》 GPT
     作者指出，当前（2018）语言模型存在问题：下游的NLP任务依赖大量的人工标注数据，不同方向需要不同的模型，这不仅耗费时间，而且
 训练出的模型不能立刻投入使用，成本大。而互联网拥有大量未标注数据，这些数据中同样蕴含着丰富的信息。因此，作者提出了依靠未标注数
 据训练一个通用模型，再用标注数据微调模型得到某一方向专用模型的想法。
@@ -54,7 +54,7 @@ X相同维度的输出Z。
 
 
 2026.7.09
-经典 《BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding》 
+经典 《BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding》 BERT
     论文指出，语言模型下游任务的两种方式：feature-based和fine-tuning，都采用的是单向语言建模，如GPT是对下一个的token的预测。而
 本文实现了一种双通道建模的语言模型BERT，是基于MLM（masked language model）的微调模型。
     BERT是Transformer架构的变种，只保留了编码器。同时，模型在预训练阶段得到的参数，在微调阶段时，即使是不同的任务也会作为相同
@@ -69,12 +69,24 @@ token。对于下一句预测任务，简单使用A+B二分类，训练时，B�
 不是很明显了。
     本文首次提出了基于ransformer Encoder的深层双通道预训练模型。
 
+
 2026.07.16
 经典 《Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks》 RAG
-    作者指出，现有（2022）的微调语言模型尽管在多数的下游任务表现出了良好的性能，但是依旧存在缺点：无法阐明预测的本质原理；面对
+    作者指出，现有（2020）的微调语言模型尽管在多数的下游任务表现出了良好的性能，但是依旧存在缺点：无法阐明预测的本质原理；面对
 未知问题会产生“幻觉”（即胡编乱造）。原因是微调模型训练的参数是全固定的，无法修改。所以作者提出了一种固定部分参数+动态检索知识库
 的非全参数化方法（即RAG）解决微调模型会产生的幻觉问题。
     模型采用了序列-序列的端对端Transformer架构（输入一句话，输出一句话即为序列-序列，transformer保留了原始架构），输入接受查询
 （Query）和潜在文档ID的序列，输出根据最符合查询的潜在文档的内容和查询一起生成。具体而言，结构如下：
-    
+    采用DPR作为检索器
+
+
+2026.07.16
+经典 《Dense Passage Retrieval for Open-Domain Question Answering》 DPR
+    开放问题回答（Open-domain QA）一直是研究的热门，传统方法都是基于稀疏向量的匹配，但是无法解决同义词问题，作者提出了基于稠密向
+量检索的方法用来回答问题，该方案实现了语义匹配而非词的匹配。模型采用了BERT的架构以及同样的双通道编码方式。作者指出，开放问题回答
+的性能依赖于检索器（Retriever）的召回率好坏，因此提高检索器性能能够显著提高最终问答准确率。
+    本质上，DPR是这样一个函数：输入接受问题Q和文档序列D_n，返回值是Top-k最切近问题的文档，k远小于n。模型结构：采用了BERT的双通道
+结构（transformer的encoder部分），对输入的问题进行向量化，对给出的文档向量化，问题与文档相似度匹配，输出top-k个最匹配的文档。
+    本文显著提升了检索准确率，并在开放问题回答领域远远由于传统方法。
+
 
