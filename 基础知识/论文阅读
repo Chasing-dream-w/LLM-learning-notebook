@@ -130,7 +130,9 @@ Agent经典 《Toolformer: Language Models Can Teach Themselves to Use Tools》
 显著提升其在下游任务的性能。
 
 
-
+2026.07.27
+React 和 Toolformer都着手于让大模型调用外部工具，属于同一时代的并行科研道路。不同的是，React侧重于将用户的问题做思考+行动，在执行阶
+段调用API，而Tooolformer则是在训练阶段，将API查询以文本形式插入原数据内以提高下一Token预测的准确率。
 
 
 
